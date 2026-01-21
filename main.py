@@ -13,7 +13,7 @@ def divide(a, b):
         return a/b
 
 while True:
-    print("\n=== Persistent Python Calculator ===")
+    print("\n=== CS323 Mesa's Group Simple Calculator ===")
     print("1. Add")
     print("2. Subtract")
     print("3. Multiply")
