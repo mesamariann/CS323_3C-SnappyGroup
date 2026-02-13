@@ -1,3 +1,7 @@
+# Lab Activity 3: Applying Task and Data Parallelism using concurrent.futures
+
+### Analysis and Discussions
+
 ### 1. Differentiate Task and Data Parallelism. Identify which part of the lab demonstrates each and justify the workload division.
 
 **Answer:**
@@ -59,3 +63,4 @@ In a big company, such as a bank, payroll has to handle thousands of employees. 
 Task Parallelism: For one employee, different payroll tasks like calculating deductions, creating the payslip, and saving the record to the database can be done at the same time. Each task works on its own, so running them together speeds up the process. ThreadPoolExecutor is a good choice here because many of these tasks involve waiting for files or databases, and they can run at the same time even if they don’t use much CPU.
 
 Data Parallelism: When processing payroll for 10,000 employees, the same steps calculating gross salary, deductions, and net pay can be done for all employees at the same time. Each employee’s payroll can run in its own process using ProcessPoolExecutor. This lets multiple CPU cores work in parallel, making it much faster to complete a large payroll batch.
+
