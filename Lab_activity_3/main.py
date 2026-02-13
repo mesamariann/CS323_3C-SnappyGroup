@@ -58,3 +58,17 @@ def data_parallelism(employees):
             print("Gross Salary:", salary)
             print("Total Deduction:", total)
             print("Net Salary:", net)
+
+
+# MAIN
+if __name__ == "__main__":
+    employees = [
+        ("Alice", 25000),
+        ("Bob", 32000),
+        ("Charlie", 28000),
+        ("Diana", 40000),
+        ("Edward", 35000)
+    ]
+
+    task_parallelism(employees[0])
+    data_parallelism(employees)
