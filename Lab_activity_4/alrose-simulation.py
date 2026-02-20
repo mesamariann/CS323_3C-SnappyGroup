@@ -98,3 +98,25 @@ def run_parallel(num_orders, edit_time, print_time, finish_time, payment_time):
 
     end = time.time()
     return end - start
+
+def main():
+    print("=== Alrose Printing Service Simulation ===")
+
+    num_orders = int(input("Enter number of orders: "))
+    edit_time = float(input("Enter editing time per order (seconds): "))
+    print_time = float(input("Enter printing time per order (seconds): "))
+    finish_time = float(input("Enter finishing time per order (seconds): "))
+    payment_time = float(input("Enter payment time per order (seconds): "))
+
+    seq_time = run_sequential(num_orders, edit_time, print_time, finish_time, payment_time)
+    print(f"\nSequential Time: {seq_time:.2f} seconds")
+
+    par_time = run_parallel(num_orders, edit_time, print_time, finish_time, payment_time)
+    print(f"\nParallel Time: {par_time:.2f} seconds")
+
+    speedup = seq_time / par_time
+    print(f"\nSpeedup Achieved: {speedup:.2f}x")
+
+
+if __name__ == "__main__":
+    main()
