@@ -84,3 +84,17 @@ def run_parallel(num_orders, edit_time, print_time, finish_time, payment_time):
 
             finishing(order, finish_time)
             payment(order, payment_time)
+
+            start = time.time()
+
+    thread_edit = threading.Thread(target=editing_worker)
+    thread_print = threading.Thread(target=printing_worker)
+
+    thread_edit.start()
+    thread_print.start()
+
+    thread_edit.join()
+    thread_print.join()
+
+    end = time.time()
+    return end - start
