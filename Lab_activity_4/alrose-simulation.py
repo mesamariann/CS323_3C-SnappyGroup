@@ -48,3 +48,39 @@ def run_sequential(num_orders, edit_time, print_time, finish_time, payment_time)
 
     end = time.time()
     return end - start
+
+# Parallel Implementation
+
+def run_parallel(num_orders, edit_time, print_time, finish_time, payment_time):
+    print("\n===== PARALLEL EXECUTION =====\n")
+
+    input_queue = Queue()
+    ready_to_print_queue = Queue()
+    printer_lock = threading.Lock()
+
+    for i in range(num_orders):
+        input_queue.put(PrintOrder(i))
+
+    input_queue.put(None)
+
+    def editing_worker():
+        while True:
+            order = input_queue.get()
+            if order is None:
+                ready_to_print_queue.put(None)
+                break
+
+            edit_and_format(order, edit_time)
+            ready_to_print_queue.put(order)
+
+    def printing_worker():
+        while True:
+            order = ready_to_print_queue.get()
+            if order is None:
+                break
+
+            with printer_lock:
+                print_document(order, print_time)
+
+            finishing(order, finish_time)
+            payment(order, payment_time)
