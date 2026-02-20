@@ -31,3 +31,20 @@ def finishing(order, finish_time):
 def payment(order, payment_time):
     print(f"[Payment] Order {order.order_id} completed\n")
     time.sleep(payment_time)
+
+    # Sequential Implementation
+
+def run_sequential(num_orders, edit_time, print_time, finish_time, payment_time):
+    print("\n===== SEQUENTIAL EXECUTION =====\n")
+    start = time.time()
+
+    orders = [PrintOrder(i) for i in range(num_orders)]
+
+    for order in orders:
+        edit_and_format(order, edit_time)
+        print_document(order, print_time)
+        finishing(order, finish_time)
+        payment(order, payment_time)
+
+    end = time.time()
+    return end - start
