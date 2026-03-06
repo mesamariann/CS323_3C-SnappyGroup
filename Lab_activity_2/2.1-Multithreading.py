@@ -2,9 +2,8 @@ import threading
 import time
 
 
-# =======================
+
 # HEADER DESIGN
-# =======================
 print("-" * 40)
 print("+    GWA Calculator (Multithreading)   +")
 print("-" * 40 + "\n\n")
@@ -21,9 +20,7 @@ def process_subject(grade, subject_id, shared_results, lock):
 
 
 def main():
-    # =======================
     # INPUT SECTION
-    # =======================
     print("-" * 40)
     print("+           INPUT SECTION             +")
     print("-" * 40)
@@ -35,9 +32,8 @@ def main():
         grade = float(input(f"Enter grade for subject {i + 1}: "))
         grades.append(grade)
 
-    # =======================
+
     # THREADING SETUP
-    # =======================
     threads = []
     results = []
     lock = threading.Lock()
@@ -59,9 +55,8 @@ def main():
     for thread in threads:
         thread.join()
 
-    # =======================
+
     # RESULTS SECTION
-    # =======================
     gwa = sum(results) / len(results)
     end_time = time.time()
 
