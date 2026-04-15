@@ -1,4 +1,9 @@
 # Galleros
+The findings indicate that sequential algorithms operate more quickly with small and medium datasets, whereas parallel algorithms gain efficiency primarily with very large datasets. For small datasets (1,000 elements), sequential searching and sorting proved to be significantly quicker since parallel processing incurred too much overhead. For medium-sized data (100,000 elements), sequential sorting remained marginally quicker, and sequential search outperformed parallel search significantly.
+
+For substantial datasets (1,000,000 elements), parallel sorting outperformed sequential sorting as several processes could manage the workload simultaneously. Nevertheless, parallel search remained slower because of the overhead involved in generating processes and merging outcomes. During execution, difficulties involved evenly distributing data, handling various processes, combining sorted outcomes, and gathering results from concurrent searches. Debugging parallel programming was more difficult since processes execute simultaneously.
+
+Overall, parallelism is effective for extensive and complex calculations such as organizing large datasets, but it proves inefficient for minor tasks or straightforward operations like linear search since the overhead exceeds the performance benefit
 
 # Galendez
 In this activity, I learned the difference between sequential and parallel algorithms through actual implementation. The sequential approach was easier to understand because everything runs step by step. I used merge sort for sorting and binary search for searching, and I noticed that most of the execution time is spent on sorting rather than searching.
