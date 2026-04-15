@@ -5,6 +5,7 @@ For substantial datasets (1,000,000 elements), parallel sorting outperformed seq
 
 Overall, parallelism is effective for extensive and complex calculations such as organizing large datasets, but it proves inefficient for minor tasks or straightforward operations like linear search since the overhead exceeds the performance benefit
 
+
 # Galendez
 In this activity, I learned the difference between sequential and parallel algorithms through actual implementation. The sequential approach was easier to understand because everything runs step by step. I used merge sort for sorting and binary search for searching, and I noticed that most of the execution time is spent on sorting rather than searching.
 
@@ -14,8 +15,16 @@ One challenge I encountered was making sure the data is sorted before applying b
 
 Overall, I realized that sequential algorithms are simple and efficient for smaller datasets. Parallel algorithms may be faster for large data, but they also introduce more complexity and overhead, so they are not always the better choice.
 
+
 # Mesa
 When comparing sequential and parallel execution in our code, the main difference I observed is how the tasks are handled. Sequential execution follows a single flow, like in our recursive merge sort and linear search, which made it easier to implement and debug. In contrast, the parallel version splits the data into chunks and assigns them to multiple processes using `multiprocessing`, which makes the execution faster but also more complex. In terms of performance, sequential execution worked better for smaller datasets because it avoids the extra overhead, while parallel execution started to perform better as the dataset size increased, especially during sorting where chunks can be processed simultaneously.
 
 One challenge I encountered during implementation was handling synchronization and merging, particularly in the parallel merge sort where sorted chunks needed to be combined correctly. Managing queues and ensuring all processes finished properly also added difficulty. I also realized that process creation and communication introduce overhead, which can actually slow things down for smaller inputs. From this, I learned that parallelism is most beneficial when the dataset is large enough to justify the added complexity and overhead, but for smaller datasets or simpler tasks like quick searches, sequential execution is still the more efficient and practical choice.
+
+
+# Betonio
+Implementing sequential and parallel algorithms revealed that the primary difference lies in the execution model and resource utilization. While the sequential approach follows a linear control flow limited by a single CPU core, the parallel approach divides the problem into independent chunks to utilize multi-core systems. During testing, I observed that sequential algorithms are often more efficient for small datasets because they avoid the higher overhead costs associated with process creation and inter-process communication. However, as the dataset size increased to one million elements, the scalability of the parallel implementation became a clear advantage, as the computational workload finally outweighed the coordination costs.
+
+The implementation process presented significant challenges, particularly regarding synchronization and the merging of results. In parallel searching, it was critical to ensure that worker processes returned the correct global index by accounting for their specific data offsets. For sorting, the complexity shifted to the final stage, where independently sorted partitions had to be merged into a single globally sorted output. This activity highlighted that parallelism is not inherently faster; its effectiveness is strictly dependent on the size of the dataset and the efficiency of communication. Ultimately, I learned that while parallel execution is essential for large-scale data, sequential execution remains the more practical and predictable choice for smaller, less intensive tasks.
+
 
