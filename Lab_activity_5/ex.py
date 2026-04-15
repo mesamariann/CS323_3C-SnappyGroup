@@ -110,3 +110,33 @@ def parallel_search(data, target):
         p.join()
         
     return min(results) if results else -1
+
+
+# Testing
+def run_test(size):
+    print(f"\nTesting size: {size}")
+
+    data = generate_data(size)
+    target = data[len(data)//2]
+
+    start = time.time()
+    sequential_sort(data.copy())
+    print("Sequential Sort:", time.time() - start)
+
+    start = time.time()
+    parallel_sort(data.copy())
+    print("Parallel Sort:", time.time() - start)
+
+    start = time.time()
+    sequential_search(data, target)
+    print("Sequential Search:", time.time() - start)
+
+    start = time.time()
+    parallel_search(data, target)
+    print("Parallel Search:", time.time() - start)
+
+
+if __name__ == "__main__":
+    run_test(1000)       
+    run_test(100000)     
+    run_test(1000000)     
