@@ -66,3 +66,27 @@ def parallel_sort(data):
 
     return sorted_chunks[0]
 
+
+# Sequential Linear Search
+def sequential_search(data, target):
+    for i, value in enumerate(data):
+        if value == target:
+            return i
+    return -1
+
+# Parallel Search
+def sequential_search(data, target):
+    for i, value in enumerate(data):
+        if value == target:
+            return i
+    return -1
+
+def search_worker(sub_data, target, q, offset):
+    for i, value in enumerate(sub_data):
+        if value == target:
+            q.put(i + offset)
+            return
+    q.put(-1)
+
+
+
