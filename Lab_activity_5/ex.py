@@ -34,3 +34,35 @@ def sequential_sort(data):
     right = sequential_sort(data[mid:])
 
     return merge(left, right)
+
+# Parallel Merge Sort
+def sort_worker(data, q):
+    q.put(sequential_sort(data))
+
+
+def parallel_sort(data):
+    num_processes = 4
+    chunk_size = len(data) // num_processes
+
+    chunks = [data[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
+
+    processes = []
+    q = Queue()
+
+    for chunk in chunks:
+        p = Process(target=sort_worker, args=(chunk, q))
+        processes.append(p)
+        p.start()
+
+    sorted_chunks = [q.get() for _ in processes]
+
+    for p in processes:
+        p.join()
+
+    while len(sorted_chunks) > 1:
+        left = sorted_chunks.pop(0)
+        right = sorted_chunks.pop(0)
+        sorted_chunks.append(merge(left, right))
+
+    return sorted_chunks[0]
+
