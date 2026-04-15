@@ -7,7 +7,7 @@ def generate_data(n):
 if __name__ == "__main__":
     print("Parallel vs Sequential Algorithms")
 
-ef merge(left, right):
+def merge(left, right):
     
     result = []
     i = j = 0
