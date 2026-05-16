@@ -32,6 +32,23 @@ was written at a time and producing a complete, consistent final list.
 ## Mesa
 
 ## Betonio
+1. **How did you distribute orders among worker processes?**
+> 
+
+2. **What happens if there are more orders than workers?**
+> 
+
+3. **How did processing delays affect order completion?**
+> 
+
+4. **How did you implement shared memory, and where was it initialized?**
+>
+
+5. **What issues occurred when multiple workers wrote to shared memory?**
+> 
+
+6. **How did you ensure consistent results?**
+> 
 
 ## Galendez
 
