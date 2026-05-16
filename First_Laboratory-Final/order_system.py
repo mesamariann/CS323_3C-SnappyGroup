@@ -35,5 +35,10 @@ else:
         
         if status.Get_tag() == 0:  # stop signal
             break
+
+        # add delay 
+        delay = random.uniform(0.5, 2.0)
+        time.sleep(delay)
         
-        print(f"[Worker {rank}] Received order #{order['id']} — {order['item']}")
+        print(f"[Worker {rank}] Processed order #{order['id']} "
+              f"({order['item']}) in {delay:.2f}s")
