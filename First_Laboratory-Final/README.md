@@ -31,22 +31,22 @@ was written at a time and producing a complete, consistent final list.
 
 ## Mesa
 1. **How did you distribute orders among worker processes?**
-Orders were distributed by the master process using a round-robin or cyclical assignment strategy. By utilizing comm.send(), the master rotated through the available worker ranks, assigning tasks evenly so that the workload was shared across the entire system rather than piling up on a single worker.
+> Orders were distributed by the master process using a round-robin or cyclical assignment strategy. By utilizing comm.send(), the master rotated through the available worker ranks, assigning tasks evenly so that the workload was shared across the entire system rather than piling up on a single worker.
 
 2. **What happens if there are more orders than workers?**
- When the total number of orders exceeds the number of available workers, the system simply assigns multiple tasks to each worker. As soon as a worker finishes processing one order, it takes on the next assigned task in its queue, ensuring that every single order is eventually processed without any being skipped.
+> When the total number of orders exceeds the number of available workers, the system simply assigns multiple tasks to each worker. As soon as a worker finishes processing one order, it takes on the next assigned task in its queue, ensuring that every single order is eventually processed without any being skipped.
 
 3. **How did processing delays affect order completion?**
-Because each order had different processing delays, workers finished their tasks at different times. Workers handling shorter tasks finished earlier than those with longer delays, which meant that the completed orders arrived back at the master process out of their original assigned sequence.
+> Because each order had different processing delays, workers finished their tasks at different times. Workers handling shorter tasks finished earlier than those with longer delays, which meant that the completed orders arrived back at the master process out of their original assigned sequence.
 
 4. **How did you implement shared memory, and where was it initialized?**
-Shared memory was set up as a centralized Python list, which was initialized in the master process before any tasks were processed. As workers completed their orders, they sent the results back via messages, and the master process stored them in this central list.
+> Shared memory was set up as a centralized Python list, which was initialized in the master process before any tasks were processed. As workers completed their orders, they sent the results back via messages, and the master process stored them in this central list.
 
 5. **What issues occurred when multiple workers wrote to shared memory?**
-When multiple workers tried to send their results to the shared memory at the exact same time without any protective measures, it caused race conditions. This lack of synchronization resulted in unpredictable behavior, meaning the list could become inconsistent or entries could be lost.
+> When multiple workers tried to send their results to the shared memory at the exact same time without any protective measures, it caused race conditions. This lack of synchronization resulted in unpredictable behavior, meaning the list could become inconsistent or entries could be lost.
 
 6. **How did you ensure consistent results?**
-To guarantee consistent and reliable results, a Lock() mechanism was implemented in the master process. By using a lock context manager, the system ensured that only one process could append data to the shared list at any given time, completely preventing race conditions and keeping the final data intact.
+> To guarantee consistent and reliable results, a Lock() mechanism was implemented in the master process. By using a lock context manager, the system ensured that only one process could append data to the shared list at any given time, completely preventing race conditions and keeping the final data intact.
 
 ## Betonio
 1. **How did you distribute orders among worker processes?**
